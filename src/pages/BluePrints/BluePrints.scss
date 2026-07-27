@@ -1,0 +1,527 @@
+.blueprints-page {
+  padding: 1.5rem 2rem;
+  height: 100%;
+  overflow-y: auto;
+  animation: pageIn 0.4s ease;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(var(--color-primary-rgb), 0.3);
+    border-radius: 3px;
+  }
+}
+
+// Header
+.blueprints-header {
+  margin-bottom: 2rem;
+
+  &__title {
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.25rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+}
+
+// Blueprints Grid
+.blueprints-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+// Blueprint Card
+.blueprint-card {
+  background: rgba(var(--color-primary-rgb), 0.05);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.15);
+  border-radius: 20px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  animation: cardSlideUp 0.5s ease forwards;
+  opacity: 0;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(var(--color-primary-rgb), 0.15);
+
+    .blueprint-card__actions {
+      opacity: 1;
+    }
+  }
+
+  &--add {
+    border: 2px dashed rgba(var(--color-primary-rgb), 0.3);
+    background: rgba(var(--color-primary-rgb), 0.03);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    text-align: center;
+
+    &:hover {
+      border-color: var(--color-primary);
+      background: rgba(var(--color-primary-rgb), 0.08);
+
+      .add-icon {
+        transform: scale(1.1);
+        background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      }
+    }
+
+    .add-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: rgba(var(--color-primary-rgb), 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+
+      svg {
+        font-size: 1.75rem;
+        color: var(--color-primary);
+      }
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.35rem;
+    margin-left: auto;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    .action-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: rgba(var(--color-primary-rgb), 0.1);
+      border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+
+      svg {
+        font-size: 0.85rem;
+      }
+
+      &--edit:hover {
+        background: rgba(var(--color-primary-rgb), 0.2);
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+      }
+
+      &--delete:hover {
+        background: rgba(239, 68, 68, 0.15);
+        border-color: rgba(239, 68, 68, 0.4);
+        color: #f87171;
+      }
+    }
+  }
+
+  &__icon {
+    font-size: 1.75rem;
+  }
+
+  &__type {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    background: rgba(var(--color-primary-rgb), 0.15);
+    border-radius: 6px;
+    color: var(--color-accent);
+  }
+
+  &__name {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1.25rem;
+  }
+
+  &__progress {
+    margin-bottom: 1rem;
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(var(--color-primary-rgb), 0.15);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+
+      &__fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+        border-radius: 4px;
+        transition: width 0.5s ease;
+      }
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(var(--color-primary-rgb), 0.1);
+
+    .target-date {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.5);
+
+      svg {
+        font-size: 0.9rem;
+      }
+    }
+
+    .progress-percent {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+  }
+}
+
+// Dialog Styles
+.blueprint-dialog-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  inset: 0;
+  animation: overlayFadeIn 0.2s ease;
+  z-index: 1000;
+}
+
+.blueprint-dialog {
+  background: linear-gradient(145deg, rgba(26, 26, 46, 0.98), rgba(22, 22, 40, 0.98));
+  border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 0;
+  z-index: 1001;
+  animation: dialogSlideIn 0.3s ease;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(var(--color-primary-rgb), 0.3);
+    border-radius: 2px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.1);
+    background: rgba(var(--color-primary-rgb), 0.05);
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+
+    svg {
+      color: var(--color-primary);
+    }
+  }
+
+  .close-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(var(--color-primary-rgb), 0.1);
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+    }
+  }
+}
+
+// Blueprint Form
+.blueprint-form {
+  padding: 1.5rem;
+
+  .form-group {
+    margin-bottom: 1.25rem;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 0.6rem;
+
+      svg {
+        color: var(--color-primary);
+      }
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: rgba(var(--color-primary-rgb), 0.08);
+      border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+      border-radius: 12px;
+      color: white;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    input[type="date"] {
+      cursor: pointer;
+
+      &::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    @media (max-width: 500px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .input-with-prefix {
+    display: flex;
+    align-items: center;
+    background: rgba(var(--color-primary-rgb), 0.08);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+
+    &:focus-within {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+    }
+
+    .prefix {
+      padding: 0.85rem 0.75rem;
+      background: rgba(var(--color-primary-rgb), 0.1);
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 500;
+    }
+
+    input {
+      border: none;
+      background: transparent;
+      border-radius: 0;
+      padding-left: 0.75rem;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .type-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+
+    @media (max-width: 500px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .type-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.85rem 0.5rem;
+    background: rgba(var(--color-primary-rgb), 0.08);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(var(--color-primary-rgb), 0.15);
+      border-color: rgba(var(--color-primary-rgb), 0.3);
+    }
+
+    &.active {
+      background: rgba(var(--color-primary-rgb), 0.2);
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.15);
+    }
+
+    &__icon {
+      font-size: 1.5rem;
+    }
+
+    &__label {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(var(--color-primary-rgb), 0.1);
+  }
+
+  .btn-secondary {
+    padding: 0.75rem 1.25rem;
+    background: transparent;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.3);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(var(--color-primary-rgb), 0.1);
+      color: white;
+    }
+  }
+
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(var(--color-primary-rgb), 0.3);
+    }
+  }
+}
+
+// Animations
+@keyframes pageIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dialogSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
